@@ -1,5 +1,4 @@
 import fetch from 'node-fetch';
-import csv from 'csv-parser';
 
 export const getListFiles = async () => {
   try {
@@ -43,7 +42,6 @@ export const downloadFilesCalls = async (fileName) => {
 
     const data = await resp.text();
     const dataArr = data.split('\n').slice(1);
-    console.log(dataArr);
     if (resp.status != 200) return { status: resp.status, dataArr: [] };
     return { status: resp.status, dataArr };
   } catch (error) {

@@ -1,5 +1,4 @@
 import { getListFiles, downloadFilesCalls } from '../api/apiCalls.js';
-import csv from 'csv-parser';
 
 export class FileManager {
   async getFiles() {
@@ -8,7 +7,6 @@ export class FileManager {
   }
 
   async processData(filesArr) {
-    console.log;
     const dataApi = [];
     for (const nameFile of filesArr) {
       const dataFiles = await this.downloadFile(nameFile);
@@ -17,8 +15,9 @@ export class FileManager {
     }
     return dataApi;
   }
-  async downloadFile(fileName) {
-    const downloadFiles = await downloadFilesCalls(fileName);
+
+  async downloadFile(filesArrName) {
+    const downloadFiles = await downloadFilesCalls(filesArrName);
     return downloadFiles;
   }
 
@@ -30,7 +29,7 @@ export class FileManager {
       const text = values[1] || null;
       const numberValue = isNaN(values[2]) ? null : values[2];
       const hexValue = hexPattern.test(values[3]) ? values[3] : null;
-      if (!text || !numberValue || !hexValue) return null;
+      if (!text || !numberValue || !hexValue) return undefined;
 
       return {
         name,
@@ -39,6 +38,11 @@ export class FileManager {
         hex: hexValue,
       };
     });
-    return formattedResponse;
+
+    const filteredResponse = formattedResponse.filter(
+      (item) => item !== undefined
+    );
+
+    return filteredResponse;
   }
 }
