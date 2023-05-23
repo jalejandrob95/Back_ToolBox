@@ -11,7 +11,11 @@ export class FileManager {
     for (const nameFile of filesArr) {
       const dataFiles = await this.downloadFile(nameFile);
       const formatResponse = this.processResponse(dataFiles.dataArr);
-      dataApi.push(formatResponse);
+      const resp = {
+        file: nameFile,
+        list: formatResponse,
+      };
+      dataApi.push(resp);
     }
     return dataApi;
   }
