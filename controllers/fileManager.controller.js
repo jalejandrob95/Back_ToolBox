@@ -6,7 +6,8 @@ const fileService = new FileManager();
 export const listFiles = async (req, res) => {
   try {
     const getFilesList = await fileService.getFiles();
-    res.status(200).json(getFilesList);
+    const data = await fileService.processData(getFilesList?.files);
+    res.status(200).json(data);
   } catch (error) {
     console.log(error);
   }
