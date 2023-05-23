@@ -29,14 +29,12 @@ export class FileManager {
     const formattedResponse = response.map((item) => {
       const hexPattern = /^[0-9a-fA-F]{32}$/;
       const values = item.split(',');
-      const name = values[0];
       const text = values[1] || null;
       const numberValue = isNaN(values[2]) ? null : values[2];
       const hexValue = hexPattern.test(values[3]) ? values[3] : null;
       if (!text || !numberValue || !hexValue) return undefined;
 
       return {
-        name,
         text,
         number: parseInt(numberValue, 10),
         hex: hexValue,
