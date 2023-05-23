@@ -42,15 +42,10 @@ export const downloadFilesCalls = async (fileName) => {
     );
 
     const data = await resp.text();
-    const parsedData = [];
-    csv({ separator: ';' })
-      .on('data', (row) => parsedData.push(row))
-      .on('end', () => {
-        console.log(' CSV :', parsedData);
-      })
-      .write(data);
-
-    return { status: resp.status, parsedData };
+    const dataArr = data.split('\n').slice(1);
+    console.log(dataArr);
+    if (resp.status != 200) return { status: resp.status, dataArr: [] };
+    return { status: resp.status, dataArr };
   } catch (error) {
     console.log(error);
   }
