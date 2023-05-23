@@ -18,7 +18,7 @@ app.use(
 );
 
 // Routing
-//app.use('/v1/files', files);
+app.use('/v1/files', files);
 
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);

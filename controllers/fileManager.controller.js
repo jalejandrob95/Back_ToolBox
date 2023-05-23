@@ -1,4 +1,4 @@
-import { FileManager } from '../services/filesManager.service';
+import { FileManager } from '../services/filesManager.service.js';
 
 //init service files
 const fileService = new FileManager();

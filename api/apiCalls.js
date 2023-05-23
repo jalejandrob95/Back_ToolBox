@@ -1,21 +1,24 @@
-import axios from 'axios';
-
-const urlBase = axios.create({
-  baseURL: 'https://echo-serv.tbxnet.com/v1/secret/files',
-});
-
-urlBase.interceptors.request.use(async (config) => {
-  config.params = {
-    authorization: 'Bearer aSuperSecretKe',
-  };
-  return config;
-});
+import fetch from 'node-fetch';
 
 export const getListFiles = async () => {
   try {
-    const data = await getListFiles.get();
-    if (data.error) return null;
-    return data;
+    const headers = {
+      Authorization: `Bearer aSuperSecretKey`,
+    };
+
+    const config = {
+      method: 'GET',
+      headers,
+      compress: true,
+    };
+    const resp = await fetch(
+      `https://echo-serv.tbxnet.com/v1/secret/files`,
+      config
+    );
+
+    const data = await resp.json();
+
+    return { status: resp.status, ...data };
   } catch (error) {
     console.log(error);
   }

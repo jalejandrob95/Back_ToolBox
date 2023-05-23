@@ -1,4 +1,4 @@
-import { getListFiles } from '../api/apiCalls';
+import { getListFiles } from '../api/apiCalls.js';
 
 export class FileManager {
   async getFiles() {
